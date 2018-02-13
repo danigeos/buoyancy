@@ -15,15 +15,15 @@ Mytosec=1e6*365.25*24*3600
 
 #-------------------------------------
 #Compositional density contrast at the LAB (kg m-3):
-Drho_comp=41. #12 (100km tecton), 25 (200km proton), 33 (100km proton), 64 (100km archon), 68 (200km archon)
-vel=10 #mm/yr
+Drho_comp=50. #12 (100km tecton), 25 (200km proton), 33 (100km proton), 64 (100km archon), 68 (200km archon)
+vel=30. #mm/yr
 drho_dT=.1175 #Density dependence with temperature, kg m-3 K-1
-zm=5e3 #Moho depth (top pf plate), m
-zl=20e3 #Base of the Lithosphere, LAB, m
-Tm=400  #Moho temperature C
+zm=35e3 #Moho depth (top pf plate), m
+zl=200e3 #Base of the Lithosphere, LAB, m
+Tm=600  #Moho temperature C
 Ta=1300 #Asthenosphere temperature C
 sigma=45. #Subduction angle in degrees
-tmax=50 #Final time in Myr
+tmax=30 #Final time in Myr
 
 #-------------------------------------
 
@@ -130,7 +130,7 @@ plt.plot(time_arr,Fby_adv_temp, 'b', linewidth=1.5)
 plt.plot(time_arr,Fby_adv_comp, 'g', linewidth=1.5)
 plt.plot(time_arr,Fby_dif, 'r', linewidth=1.5)
 plt.plot(time_arr,Fby_total, 'grey', linewidth=3)
-plt.ylim([-3e11,5e11])
+plt.ylim([-6e12,25e12])
 #plt.xlabel("vel (km/My)")
 plt.xlabel("time (My)")
 plt.ylabel("buoyancy (N/m)")
