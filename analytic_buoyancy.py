@@ -1,9 +1,13 @@
 #!/usr/bin/python
+#D. Garcia-Castellanos,2019
 print('\n\n########################## Analytical slab buoyancy ############################')
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.axes_grid1 import make_axes_locatable
+#from mpl_toolkits.axes_grid1 import make_axes_locatable
 import os, sys, math, time
+
+import matplotlib as mpl
+from random import randint
 
 print('Number of arguments: %s' %(len(sys.argv)))	
 print('Argument List: %s' %(str(sys.argv)))
@@ -13,20 +17,25 @@ alpha=1e-6 #m2 s-1  Diffusivity
 Mytosec=1e6*365.25*24*3600
 
 
-#-------------------------------------
+#------------------------------------------
 #Compositional density contrast at the LAB (kg m-3):
-Drho_comp=20. #12 (100km tecton), 25 (200km proton), 33 (100km proton), 64 (100km archon), 68 (200km archon)
-vel=30. #mm/yr
+#12 (100km tecton) 
+#25 (200km proton) 
+#33 (100km proton) 
+#64 (100km archon)
+#68 (200km archon)
+Drho_comp=40. #Choose a value here.
+vel=10. #Convergence rate [mm/yr]
 drho_dT=.1175 #Density dependence with temperature, kg m-3 K-1
 zm=35e3 #Moho depth (top pf plate), m
 zl=200e3 #Base of the Lithosphere, LAB, m
 Tm=600  #Moho temperature C
 Ta=1300 #Asthenosphere temperature C
-sigma=45. #Subduction angle in degrees
+sigma=30. #Subduction angle in degrees
 tmax=30 #Final time in Myr
 
-force_plot_min=-50e12
-force_plot_max=+50e12
+force_plot_min=-20e12
+force_plot_max=+20e12
 #-------------------------------------
 
 H=zl-zm 
@@ -124,7 +133,7 @@ for i in range(0, nit):
 	Fby_total[i]=Fby_adv_temp[i]+Fby_adv_comp[i]+Fby_dif[i]
 	print('\tTOTAL buoyant force (>0 =>upwards) = %+.1e [N/m] (GREY)' %Fby_total[i])
 
-plt.cla()
+fig=plt.cla()
 plt.hlines(0, 0, tmax, 'k', 'dotted', '')
 #plt.hlines(+1e13, 0, tmax, 'k', 'dotted', '')
 #plt.hlines(-1e13, 0, tmax, 'k', 'dotted', '')
@@ -142,8 +151,10 @@ line_3, = plt.plot([3,2,1], 'r', label='Line 1')
 line_4, = plt.plot([3,2,1], 'gray', label='Line 1')
 plt.legend([line_1, line_2, line_3, line_4], ['Advection_above_LAB', 'Advection_below_LAB', 'Diffusion', 'Total=Adv+Diff'], loc=2)
 plt.show(block=False)
-plt.savefig('analytic_buoyancy.ps', format='ps', dpi=1000)
+plt.savefig('analytic_buoyancy.png', dpi=1000)
+#plt.savefig('analytic_buoyancy.ps', format='ps', dpi=1000)
 print('Drho_comp_crit= %.1f [kg/m3]' %Drho_comp_crit)
 print('timeSt1=%.2f My' %(time1/Mytosec))
 input("Press Enter to continue...")
 #plt.close()
+
